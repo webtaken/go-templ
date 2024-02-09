@@ -1,0 +1,33 @@
+package layout
+
+templ Base(pageTitle string) {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<meta name="description" content=""/>
+			if pageTitle != "" {
+				<title>{ pageTitle }</title>
+			} else {
+				<title>Htmx + Go tutorial</title>
+			}
+			<!-- Daisy UI -->
+			<link href="/static/css/daisyui.min.css" rel="stylesheet" type="text/css"/>
+			<!-- Tailwind CSS -->
+			<script src="/static/js/tailwind.min.js" defer></script>
+			<script>
+				tailwind.config = {
+					corePlugins: {
+						preflight: false,
+					}
+				}
+			</script>
+			<!-- HTMX -->
+			<script src="/static/js/htmx.min.js" defer></script>
+		</head>
+		<body class="mt-4 mx-2">
+			{ children... }
+		</body>
+	</html>
+}

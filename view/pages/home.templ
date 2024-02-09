@@ -1,0 +1,22 @@
+package pages
+
+import "github.com/webtaken/go-templ/view/layout"
+
+templ Home() {
+	@layout.Base("Home") {
+		<h1 class="text-center text-2xl font-bold">
+			Welcome to the Go + HTMX + Go-templ Tutorial!
+		</h1>
+		<div class="flex justify-center my-5">
+			<div class="card w-96 bg-primary text-primary-content">
+				<div class="card-body">
+					<h2 class="card-title">Go to the form tutorial</h2>
+					<p>Go to the register form to play with basic htmx methods.</p>
+					<div class="card-actions justify-end">
+						<a href="/signup" class="btn">Sign Up</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+}
