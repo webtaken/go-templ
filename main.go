@@ -9,9 +9,12 @@ type DB struct{}
 
 func main() {
 	e := echo.New()
+	// e.Use(middleware.CSRF())
+
 	e.Static("/static", "assets")
 	// userHandler := handler.UserHandler{}
 	e.GET("/", handler.Home)
 	e.GET("/signup", handler.SignUp)
+	e.POST("/signup-validation", handler.SignUpValidation)
 	e.Logger.Fatal(e.Start(":3001"))
 }
