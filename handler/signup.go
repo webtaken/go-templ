@@ -15,7 +15,6 @@ func SignUp(c echo.Context) error {
 
 type RegisterFormData struct {
 	Email     string `form:"email" json:"email"`
-	Username  string `form:"username" json:"username"`
 	Firstname string `form:"firstname" json:"firstname"`
 	Lastname  string `form:"lastname" json:"lastname"`
 	Phone     string `form:"phone" json:"phone"`
@@ -24,7 +23,9 @@ type RegisterFormData struct {
 }
 
 func SignUpValidation(c echo.Context) error {
-	alreadyRegisteredUsers := []string{"koki", "popi", "unknown"}
+	alreadyRegisteredEmails := []string{
+		"koki@gmail.com", "popi@hotmail.com", "babyBoomer123@outlook.com",
+	}
 	field := c.QueryParam("field")
 	var registerData RegisterFormData
 	err := c.Bind(&registerData)
@@ -36,12 +37,8 @@ func SignUpValidation(c echo.Context) error {
 		if err != nil {
 			return c.String(http.StatusOK, "Your e-mail is invalid")
 		}
-	} else if field == "username" {
-		if registerData.Username == "" {
-			return c.String(http.StatusOK, "Username cannot be empty")
-		}
-		for _, username := range alreadyRegisteredUsers {
-			if username == registerData.Username {
+		for _, email := range alreadyRegisteredEmails {
+			if email == registerData.Email {
 				return c.String(http.StatusOK, "This username is already registered")
 			}
 		}
