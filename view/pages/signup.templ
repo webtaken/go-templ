@@ -9,7 +9,7 @@ templ SignUp() {
 			<form method="post" class="w-2/5 text-sm">
 				<div class="form-control mb-3 w-full space-y-1">
 					<label for="email" class="font-semibold mb-2">E-mail:</label>
-					<input id="email" name="email" type="email" placeholder="someone@email.com" class="input input-bordered text-sm" hx-post="/signup-validation?field=email" hx-target="#email-errors" hx-trigger="keyup changed delay:500ms"/>
+					<input id="email" name="email" type="email" placeholder="someone@email.com" class="input input-bordered text-sm" hx-post="/signup-validation?field=email" hx-target="#email-errors" hx-swap="outerHTML" hx-trigger="keyup changed delay:500ms"/>
 					<span id="email-errors" class="text-sm text-error"></span>
 				</div>
 				<div class="grid grid-cols-1 md:grid-cols-2 gap-x-2 w-full">

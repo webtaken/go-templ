@@ -33,15 +33,18 @@ func SignUpValidation(c echo.Context) error {
 		return c.String(http.StatusBadRequest, "")
 	}
 	if field == "email" {
-		_, err := mail.ParseAddress(registerData.Email)
-		if err != nil {
-			return c.String(http.StatusOK, "Your e-mail is invalid")
-		}
 		for _, email := range alreadyRegisteredEmails {
 			if email == registerData.Email {
-				return c.String(http.StatusOK, "This username is already registered")
+				return c.String(http.StatusOK, "<span id=\"email-errors\" class=\"text-sm text-error\">This username is already registered</span>")
 			}
 		}
+
+		_, err := mail.ParseAddress(registerData.Email)
+		if err != nil {
+			return c.String(http.StatusOK, "<span id=\"email-errors\" class=\"text-sm text-error\">Your e-mail is invalid</span>")
+		}
+
+		return c.String(http.StatusOK, "<span id=\"email-errors\" class=\"text-sm text-success\">Correct email</span>")
 	} else if field == "firstname" {
 		if registerData.Firstname == "" {
 			return c.String(http.StatusOK, "Firstname cannot be empty")
